@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLiteHospitalDemo.AppointmentPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             Title="AppointmentPage">
+    <ContentPage.Resources>
+        <Style TargetType="Label"
+               x:Key="tableLabel">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="TextDecorations"
+                    Value="Underline" />
+            <Setter Property="FontSize"
+                    Value="Title" />
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />
+        </Style>
+
+        <Shadow x:Key="shadow"
+                Brush="#CFD0D4"
+                Opacity="0.6"
+                Radius="15"
+                Offset="10,15" />
+
+        <Style TargetType="Frame">
+            <Setter Property="Shadow"
+                    Value="{StaticResource shadow}" />
+        </Style>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <Frame BackgroundColor="LightSlateGray"
+               Margin="50"
+               CornerRadius="30">
+            <VerticalStackLayout>
+                <skia:SKLottieView Source="hospital-bed.json"
+                                   RepeatCount="-1"
+                                   RepeatMode="Reverse"
+                                   HeightRequest="100"
+                                   WidthRequest="100" />
+                <Label Text="Appointment"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Grid RowDefinitions="*,*,*"
+                      ColumnDefinitions="*,*"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center">
+                    <Label Text="Patient:"
+                           VerticalOptions="Center" 
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalOptions="End"/>
+                    <Picker x:Name="patientPicker"
+                            Grid.Row="0"
+                            Grid.Column="1" 
+                            BackgroundColor="AntiqueWhite"
+                            Margin="5"
+                            TextColor="Black"/>
+                    <Label Text="Appointment Date:"
+                           VerticalOptions="Center" 
+                           Grid.Row="1"
+                           Grid.Column="0"/>
+                    <DatePicker x:Name="appointmentDate"
+                                Grid.Row="1"
+                                Grid.Column="1" 
+                                Margin="5"
+                                BackgroundColor="AntiqueWhite"/>
+                    <Label Text="Reason:"
+                           VerticalOptions="Center"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalOptions="End"/>
+                    <Editor x:Name="editor_reason"
+                            AutoSize="TextChanges"
+                            WidthRequest="100"
+                            Grid.Row="2"
+                            Grid.Column="1" 
+                            HorizontalOptions="Start"
+                            Margin="5"
+                            BackgroundColor="AntiqueWhite"/>
+                </Grid>
+
+
+                <Button x:Name="AddButton"
+                        Text="Add"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        Clicked="AddButton_Clicked" />
+
+                <Grid ColumnDefinitions="*,*,*,*,*"
+                      Margin="0,20,0,0">
+                    <Label Text="Patient ID"
+                           Grid.Column="0"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Appointment ID"
+                           Grid.Column="1"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Appointment Date"
+                           Grid.Column="2"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Appointment Reason"
+                           Grid.Column="3"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Operations"
+                           Grid.Column="4"
+                           Style="{StaticResource tableLabel}" />
+                </Grid>
+
+                <ListView HasUnevenRows="True"
+                          x:Name="appointmentListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*,*,*,*,*">
+                                    <Label Text="{Binding PatientID}"
+                                           Grid.Column="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding ID}"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding Appoint_Date, StringFormat='{0:dd/MM/yyyy}'}"
+                                           Grid.Column="2"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding Appoint_Reason}"
+                                           Grid.Column="3"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Button Text="Delete"
+                                            Grid.Column="4"
+                                            Clicked="DeleteButton_Clicked"
+                                            WidthRequest="75"
+                                            HeightRequest="40" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

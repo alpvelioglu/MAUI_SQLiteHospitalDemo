@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLiteHospitalDemo.RoomPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             Title="RoomPage">
+    <ContentPage.Resources>
+        <Style TargetType="Label"
+               x:Key="tableLabel">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="TextDecorations"
+                    Value="Underline" />
+            <Setter Property="FontSize"
+                    Value="Title" />
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />
+        </Style>
+
+        <Shadow x:Key="shadow"
+                Brush="#CFD0D4"
+                Opacity="0.6"
+                Radius="15"
+                Offset="10,15" />
+
+        <Style TargetType="Frame">
+            <Setter Property="Shadow"
+                    Value="{StaticResource shadow}" />
+        </Style>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <Frame BackgroundColor="LightSlateGray"
+               Margin="50"
+               CornerRadius="30">
+            <VerticalStackLayout>
+                <skia:SKLottieView Source="heartbeat-ecg.json"
+                                   RepeatCount="-1"
+                                   RepeatMode="Reverse"
+                                   HeightRequest="100"
+                                   WidthRequest="100" />
+                <Label Text="Room"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Grid ColumnDefinitions="*,*"
+                      RowDefinitions="*,*">
+                    <Label Text="Doctor:"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="End"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <Picker x:Name="doctorPicker" 
+                            Margin="5"
+                            HorizontalOptions="Start"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+                    <Label Text="Room Number:"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="End"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
+                    <Entry x:Name="roomNumberEntry"
+                           Margin="5" 
+                           HorizontalOptions="Start"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
+                </Grid>
+
+
+                <Button x:Name="AddButton"
+                        Text="Add"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        Clicked="AddButton_Clicked" />
+
+                <Grid ColumnDefinitions="*,*,*,*"
+                      Margin="0,20,0,0">
+                    <Label Text="Doctor ID"
+                           Grid.Column="0"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Room ID"
+                           Grid.Column="1"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Room Number"
+                           Grid.Column="2"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Operations"
+                           Grid.Column="4"
+                           Style="{StaticResource tableLabel}" />
+                </Grid>
+
+                <ListView HasUnevenRows="True"
+                          x:Name="roomListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*,*,*,*">
+                                    <Label Text="{Binding DoctorID}"
+                                           Grid.Column="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding ID}"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding RoomNumber}"
+                                           Grid.Column="2"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Button Text="Delete"
+                                            Grid.Column="3"
+                                            Clicked="DeleteButton_Clicked"
+                                            WidthRequest="75"
+                                            HeightRequest="40" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

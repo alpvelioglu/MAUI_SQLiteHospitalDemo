@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SQLiteHospitalDemo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SQLiteHospitalDemo"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <Tab Title="Patient" Icon="patient.png">
+            <ShellContent ContentTemplate="{DataTemplate local:PatientPage}"
+                          Route="PatientPage" />
+        </Tab>
+        <Tab Title="Appointment"
+             Icon="appointment.png">
+            <ShellContent ContentTemplate="{DataTemplate local:AppointmentPage}"
+                          Route="AppointmentPage" />
+        </Tab>
+        <Tab Title="Doctor"
+             Icon="doctor.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DoctorPage}"
+                          Route="DoctorPage" />
+        </Tab>
+        <Tab Title="Room"
+             Icon="room.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RoomPage}"
+                          Route="RoomPage" />
+        </Tab>
+        <Tab Title="Prescription"
+             Icon="prescription.png">
+            <ShellContent ContentTemplate="{DataTemplate local:PrescriptionPage}"
+                          Route="PrescriptionPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>

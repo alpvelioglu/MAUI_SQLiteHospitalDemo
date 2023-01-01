@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLiteHospitalDemo.DoctorPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             Title="DoctorPage">
+    <ContentPage.Resources>
+        <Style TargetType="Label"
+               x:Key="tableLabel">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="TextDecorations"
+                    Value="Underline" />
+            <Setter Property="FontSize"
+                    Value="Title" />
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />
+        </Style>
+
+        <Shadow x:Key="shadow"
+                Brush="#CFD0D4"
+                Opacity="0.6"
+                Radius="15"
+                Offset="10,15" />
+
+        <Style TargetType="Frame">
+            <Setter Property="Shadow"
+                    Value="{StaticResource shadow}" />
+        </Style>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <Frame BackgroundColor="LightSlateGray"
+               Margin="50"
+               CornerRadius="30">
+            <VerticalStackLayout>
+                <skia:SKLottieView Source="hospital-lottie.json"
+                                   RepeatCount="-1"
+                                   RepeatMode="Reverse"
+                                   HeightRequest="100"
+                                   WidthRequest="100" />
+                <Label Text="Doctor Registration"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+
+                <Grid ColumnDefinitions="*,*"
+                      RowDefinitions="*,*">
+                    <Label Text="Doctor Name:"
+                           VerticalOptions="Center"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalOptions="End" />
+                    <Entry WidthRequest="100"
+                           Margin="10"
+                           x:Name="doctorNameEntry"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalOptions="Start"/>
+                    <Label Text="Doctor Last Name:"
+                           VerticalOptions="Center"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalOptions="End" />
+                    <Entry WidthRequest="100"
+                           Margin="10"
+                           x:Name="doctorLastNameEntry"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalOptions="Start"/>
+                </Grid>
+
+                <Button x:Name="AddButton"
+                        Text="Add"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        Clicked="AddButton_Clicked" />
+
+                <Grid ColumnDefinitions="*,*,*,*"
+                      Margin="0,20,0,0">
+                    <Label Text="Doctor ID"
+                           Grid.Column="0"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Doctor Name"
+                           Grid.Column="1"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Doctor Surname"
+                           Grid.Column="2"
+                           Style="{StaticResource tableLabel}" />
+                    <Label Text="Operations"
+                           Grid.Column="3"
+                           Style="{StaticResource tableLabel}" />
+                </Grid>
+
+                <ListView HasUnevenRows="True"
+                          x:Name="doctorListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*,*,*,*">
+                                    <Label Text="{Binding ID}"
+                                           Grid.Column="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding DoctorName}"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding DoctorLastName}"
+                                           Grid.Column="2"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Button Text="Delete"
+                                            Grid.Column="3"
+                                            Clicked="DeleteButton_Clicked"
+                                            WidthRequest="75"
+                                            HeightRequest="40" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>
